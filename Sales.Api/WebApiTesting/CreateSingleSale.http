@@ -1,0 +1,20 @@
+POST http://localhost:5000/api/sales/ HTTP/1.1
+Accept: application/json
+Content-Type:application/json
+
+{
+  "region": "Middle East and North Africa",
+  "country": "Morocco",
+  "itemType": "Clothes",
+  "salesChannel": "Online",
+  "orderPriority": "M",
+  "orderDate": "2013-10-13T22:00:00Z",
+  "orderId": 667593514,
+  "shipDate": "2013-11-18T23:00:00Z",
+  "unitsSold": 4611,
+  "unitPrice": 109.28,
+  "unitCost": 35.84,
+  "totalRevenue": 503890.08,
+  "totalCost": 165258.24,
+  "totalProfit": 338631.84
+}

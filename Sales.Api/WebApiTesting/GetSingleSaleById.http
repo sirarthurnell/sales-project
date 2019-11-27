@@ -1,0 +1,1 @@
+GET http://localhost:5000/api/sales/5ddbaddbd6f47d96af9579d2 HTTP/1.1

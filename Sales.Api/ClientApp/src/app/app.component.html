@@ -1,0 +1,50 @@
+<ngx-spinner></ngx-spinner>
+<div id="app">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+    <a href="/" class="navbar-brand ml-3"
+      >SalesCo</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a
+            appEnableIfLogged
+            routerLink="/sales"
+            class="nav-link"
+            ><span class="icon icon-file-text2"></span>Sales</a
+          >
+        </li>
+        <li class="nav-item">
+          <a            
+            appDisableIfLogged
+            routerLink="/register"
+            class="btn btn-primary btn-sm"
+            ><span class="icon icon-file-text2"></span>Register</a
+          >
+        </li>
+      </ul>
+      <a
+        appEnableIfLogged
+        routerLink="/logout"
+        class="btn btn-danger btn-sm"
+        ><span class="icon icon-exit"></span>Logout</a
+      >
+    </div>
+  </nav>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

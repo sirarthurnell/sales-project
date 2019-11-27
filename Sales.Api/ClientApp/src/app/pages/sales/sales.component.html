@@ -1,0 +1,178 @@
+<div class="row mb-4">
+  <div class="col">
+    <div class="display-4">Sales</div>
+  </div>
+</div>
+
+<div *ngIf="filters" class="row mb-1">
+  <div class="col">
+    <form #f="ngForm" name="saleForm">
+      <div class="form-group row">
+        <!-- Region and country -->
+        <div class="col-sm-6">
+          <label for="regionCountry">Region and country</label>
+          <select
+            [(ngModel)]="searchRequest.regionCountry"
+            class="form-control"
+            name="regionCountry"
+          >
+            <option
+              *ngFor="let regionCountry of filters.regionsCountries"
+              [value]="regionCountry"
+              >{{ regionCountry }}</option
+            >
+          </select>
+        </div>
+
+        <!-- Item type -->
+        <div class="col-sm-6">
+          <label for="itemType">Item type</label>
+          <select
+            [(ngModel)]="searchRequest.itemType"
+            class="form-control"
+            name="itemType"
+          >
+            <option
+              *ngFor="let itemType of filters.itemTypes"
+              [value]="itemType"
+              >{{ itemType }}</option
+            >
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <!-- Sales channel -->
+        <div class="col-sm-6">
+          <label for="salesChannel">Sales channel</label>
+          <select
+            [(ngModel)]="searchRequest.salesChannel"
+            class="form-control"
+            name="salesChannel"
+          >
+            <option
+              *ngFor="let salesChannel of filters.salesChannels"
+              [value]="salesChannel"
+              >{{ salesChannel }}</option
+            >
+          </select>
+        </div>
+
+        <!-- Order priority -->
+        <div class="col-sm-6">
+          <label for="orderPriority">Order priority</label>
+          <select
+            [(ngModel)]="searchRequest.orderPriority"
+            class="form-control"
+            name="orderPriority"
+          >
+            <option
+              *ngFor="let orderPriority of filters.orderPriorities"
+              [value]="orderPriority"
+              >{{ orderPriority }}</option
+            >
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col">
+    <button
+      class="btn btn-success btn-sm"
+      data-toggle="modal"
+      data-target="#exampleModal"
+      (click)="createSale()"
+    >
+      Create
+    </button>
+
+    <button class="btn btn-primary btn-sm ml-2" (click)="search()">
+      Search
+    </button>
+  </div>
+</div>
+
+<div *ngIf="paginated" class="row">
+  <div class="col">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th><a href="#" (click)="applyOrdering($event, 'region')">Region</a></th>
+          <th><a href="#" (click)="applyOrdering($event, 'country')">Country</a></th>
+          <th><a href="#" (click)="applyOrdering($event, 'itemType')">Item Type</a></th>
+          <th><a href="#" (click)="applyOrdering($event, 'salesChannel')">Sales Channel</a></th>
+          <th><a href="#" (click)="applyOrdering($event, 'orderPriority')">Order Priority</a></th>
+          <th>Order Date</th>
+          <th>Ship Date</th>
+          <th>Units Sold</th>
+          <th>Unit Price</th>
+          <th>Unit Cost</th>
+          <th>Total Revenue</th>
+          <th>Total Cost</th>
+          <th>Total Profit</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sale of paginated.pageContent">
+          <td>{{ sale.region }}</td>
+          <td>{{ sale.country }}</td>
+          <td>{{ sale.itemType }}</td>
+          <td>{{ sale.salesChannel }}</td>
+          <td>{{ sale.orderPriority }}</td>
+          <td>{{ sale.orderDate }}</td>
+          <td>{{ sale.shipDate }}</td>
+          <td>{{ sale.unitsSold }}</td>
+          <td>{{ sale.unitPrice }}</td>
+          <td>{{ sale.unitCost }}</td>
+          <td>{{ sale.totalRevenue }}</td>
+          <td>{{ sale.totalCost }}</td>
+          <td>{{ sale.totalProfit }}</td>
+          <td>
+            <button
+              class="btn btn-danger btn-sm btn-block"
+              (click)="deleteSale(sale)"
+            >
+              Delete
+            </button>
+            <button
+              class="btn btn-primary btn-sm btn-block mt-1"
+              data-toggle="modal"
+              data-target="#exampleModal"
+              (click)="updateSale(sale)"
+            >
+              Update
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li *ngIf="!isFirstPage()" class="page-item">
+          <a class="page-link" href="#" (click)="previousPage($event)"
+            >Previous</a
+          >
+        </li>
+        <li class="page-item disabled">
+          <a class="page-link" href="#"
+            >{{ paginated.currentPage + 1 }} of {{ paginated.totalPages }}</a
+          >
+        </li>
+        <li *ngIf="!isLastPage()" class="page-item">
+          <a class="page-link" href="#" (click)="nextPage($event)">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<app-edit-dialog
+  [sale]="currentSale"
+  [title]="editOperation"
+  [updateFunction]="updateFunction"
+></app-edit-dialog>

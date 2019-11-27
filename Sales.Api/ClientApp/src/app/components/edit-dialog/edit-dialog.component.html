@@ -1,0 +1,152 @@
+<div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ title }}</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form *ngIf="filters && sale" #f="ngForm" name="saleForm">
+          <!-- Region and country -->
+          <div class="form-group">
+            <label for="regionCountry">Region and country</label>
+            <select
+              [(ngModel)]="currentRegionCountry"
+              class="form-control"
+              name="regionCountry"
+            >
+              <option
+                *ngFor="let regionCountry of filters.regionsCountries"
+                [value]="regionCountry"
+                >{{ regionCountry }}</option
+              >
+            </select>
+          </div>
+
+          <!-- Item type -->
+          <div class="form-group">
+            <label for="itemType">Item type</label>
+            <select
+              [(ngModel)]="sale.itemType"
+              class="form-control"
+              name="itemType"
+            >
+              <option
+                *ngFor="let itemType of filters.itemTypes"
+                [value]="itemType"
+                >{{ itemType }}</option
+              >
+            </select>
+          </div>
+
+          <!-- Sales channel -->
+          <div class="form-group">
+            <label for="salesChannel">Sales channel</label>
+            <select
+              [(ngModel)]="sale.salesChannel"
+              class="form-control"
+              name="salesChannel"
+            >
+              <option
+                *ngFor="let salesChannel of filters.salesChannels"
+                [value]="salesChannel"
+                >{{ salesChannel }}</option
+              >
+            </select>
+          </div>
+
+          <!-- Order priority -->
+          <div class="form-group">
+            <label for="orderPriority">Order priority</label>
+            <select
+              [(ngModel)]="sale.orderPriority"
+              class="form-control"
+              name="orderPriority"
+            >
+              <option
+                *ngFor="let orderPriority of filters.orderPriorities"
+                [value]="orderPriority"
+                >{{ orderPriority }}</option
+              >
+            </select>
+          </div>
+
+          <!-- Order date -->
+          <div class="form-group">
+            <label for="orderDate">Order date</label>
+            <input
+              type="date"
+              name="orderDate"
+              [ngModel]="currentOrderDate | date: 'yyyy-MM-dd'"
+              (ngModelChange)="currentOrderDate = $event"
+              class="form-control"
+            />
+          </div>
+
+          <!-- Ship date -->
+          <div class="form-group">
+            <label for="shipDate">Ship date</label>
+            <input
+              type="date"
+              name="shipDate"
+              [ngModel]="currentShipDate | date: 'yyyy-MM-dd'"
+              (ngModelChange)="currentShipDate = $event"
+              class="form-control"
+            />
+          </div>
+
+          <!-- Units sold -->
+          <div class="form-group">
+            <label for="unitsSold">Units sold</label>
+            <input
+              type="number"
+              step="any"
+              name="unitsSold"
+              [(ngModel)]="sale.unitsSold"
+              class="form-control"
+            />
+          </div>
+
+          <!-- Unit price -->
+          <div class="form-group">
+            <label for="unitPrice">Unit price</label>
+            <input
+              type="number"
+              step="any"
+              name="unitPrice"
+              [(ngModel)]="sale.unitPrice"
+              class="form-control"
+            />
+          </div>
+
+          <!-- Unit cost -->
+          <div class="form-group">
+            <label for="unitCost">Unit cost</label>
+            <input
+              type="number"
+              step="any"
+              name="unitCost"
+              [(ngModel)]="sale.unitCost"
+              class="form-control"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveChanges()">
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

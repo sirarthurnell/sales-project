@@ -1,0 +1,12 @@
+POST http://localhost:5000/api/user/register/ HTTP/1.1
+Accept: application/json
+Content-Type:application/json
+
+{
+    "Email": "example@company.com",
+    "Password": "Passw0rd*",
+    "ConfirmPassword": "Passw0rd*",
+    "Name": "John",
+    "LastName": "Doe",
+    "City": "Los Angeles"
+}
